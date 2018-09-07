@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Knewave');
+
+.App {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  margin: auto
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+@media(max-width: 450px) {
+  .App-header {
+    padding: 0 5px;
+  }
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.title {
+    font-family: 'Knewave', cursive;
+    font-size: x-large;
+}

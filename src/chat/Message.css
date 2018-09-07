@@ -1,0 +1,47 @@
+.message {
+    padding: 4px 16px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    background: #fff;
+    display: inline-block !important;
+    pointer-events: all;
+}
+
+.ant-list-icon-content {
+    display: inline;
+}
+
+.message-sent {
+    float: right;
+    margin-left: 20%;
+    /* margin-bottom: 8px; */
+}
+
+.message-received {
+    float: left;
+    margin-right: 20%;
+    z-index: 2;
+    /* margin-top: 8px; */
+}
+
+.message-time {
+    padding: .2rem;
+    flex: 1 1 100%;
+    font-size: 10px;
+    transform: translateY(-100%);
+    z-index: -1;
+}
+
+.message-time-unhide {
+    transform: translateY(0%);
+}
+
+.message-time-hide {
+    display: none;
+}
+
+.message-container {
+    display: flex;
+    flex-wrap: wrap;
+}

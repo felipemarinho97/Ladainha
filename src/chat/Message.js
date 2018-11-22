@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Avatar } from 'antd';
 import './Message.css'
 
 class Message extends Component {
@@ -35,7 +34,6 @@ class Message extends Component {
         else 
             return (
                 <div className="message-container" style={{width: '100%', padding: '0 1rem'}}>
-                    {/* <Avatar style={{float: 'left'}} src = { this.props.user.photoURL } size="small" icon="user" /> */}
                     <div onClick={this.toggleVisivility.bind(this)} className="message message-received">
                         {this.props.message.text} 
                     </div>

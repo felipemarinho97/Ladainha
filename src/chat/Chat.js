@@ -2,28 +2,27 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Message from './Message';
 import { firestore } from 'firebase';
-import { List, Input } from 'antd';
+import { List, Input, Button } from 'antd';
 import { connect } from 'react-redux'
 import { setChatMessages } from '../actions';
 import emojione from 'emojione';
 import { sendNotification } from '../util/push-notifications';
-
-const MessageInput = ({}) => (
-    <Input
-        id="send-message" autoComplete="off"
-        value={this.state.message}
-        onChange={this.handleChange.bind(this)}
-        style={{ margin: '1rem', width: '92%', position: 'inherit', bottom: '0', left: '20%' }}
-        onPressEnter={this.sendMessage} placeholder="Escrever mensagem.." />
-)
+import Media from "react-media";
+import './Chat.css';
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
+import { i18nEmojiMart } from '../util/strings';
 
 class Chat extends Component {
+    inputRef = React.createRef();
+
     constructor(props) {
         super(props);
 
         this.state = {
             message: '',
-            destToken: ''
+            destToken: '',
+            showEmojiPicker: false
         }
 
         this.sendMessage = this.sendMessage.bind(this)
@@ -120,29 +119,83 @@ class Chat extends Component {
         this.scrollToBottom();
     }
 
+    addEmoji(e) {
+        this.setState({ message: this.state.message + e.native })
+        this.inputRef.current.focus();
+    }
+
+    toggleEmojiPicker() {
+        
+        if (this.state.showEmojiPicker) {
+            this.setState({ showEmojiPicker: false });
+            this.inputRef.current.focus();
+        } else {
+            this.setState({ showEmojiPicker: true });
+        }
+    }
+
+    conditionalyCloseEmojiPicker() {
+        console.log("caldo");
+        
+        if (this.state.showEmojiPicker) {
+            this.setState({ showEmojiPicker: false });
+            this.inputRef.current.focus();
+        }
+    }
+
     render() {
         console.log("render Chat", this.props);
-
+        const { showEmojiPicker } = this.state;
+        
         return (
             <div style={{
                 height: '100vh',
                 paddingBottom: '128px'}}>
-                <List 
+                <List
+                    onClick={this.conditionalyCloseEmojiPicker.bind(this)}
                     ref={(div) => {
                         this.messageList = div;
                     }}
-                    style={{overflowY: 'scroll', height: '100%'}} bordered={false} dataSource={this.props.messages} renderItem={messBody => (
-                    <List.Item style={{borderBottom: 'none', padding: '6px 0px'}}>
-                        <Message style={{display: 'inline'}} currUID={this.props.currentUser.uid} message={messBody} />
-                    </List.Item>
-                )} />
-                {/* <MessageInput /> */}
+                    style={{overflowY: 'scroll', height: '100%'}}
+                    bordered={false}
+                    dataSource={this.props.messages}
+                    renderItem={messBody => (
+                        <List.Item style={{ borderBottom: 'none', padding: '6px 0px' }}>
+                            <Message style={{display: 'inline'}} currUID={this.props.currentUser.uid} message={messBody} />
+                        </List.Item>
+                    )}
+                    />
                 <Input
+                    ref={this.inputRef}
+                    onClick={this.conditionalyCloseEmojiPicker.bind(this)}
+                    autoFocus={true}
                     id="send-message" autoComplete="off"
                     value={this.state.message}
                     onChange={this.handleChange.bind(this)}
                     style={{ margin: '1rem', width: '92%', position: 'inherit', bottom: '0', left: '20%' }}
                     onPressEnter={this.sendMessage} placeholder="Escrever mensagem.." />
+                 <Media  query="(max-width: 999px)">
+                    {matches =>
+                        matches ? '' : (
+                        <span style={{ position: 'relative' }}>
+                            <Button onClick={this.toggleEmojiPicker.bind(this)} shape="circle" icon="smile" />
+                            {showEmojiPicker? 
+                                    <Picker 
+                                        native={true} 
+                                        onSelect={this.addEmoji.bind(this)} 
+                                        autoFocus={true} 
+                                        style={{ position: 'absolute' }} 
+                                        title='Selecione um emoji…' 
+                                        emoji='point_up'
+                                        showPreview={false}
+                                        exclude={['recent']}
+                                        i18n={i18nEmojiMart} />
+                                : ''
+                            }
+                        </span>
+                        )
+                    }
+                </Media>
             </div>
         )
     }

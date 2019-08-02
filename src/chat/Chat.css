@@ -1,5 +1,21 @@
 .emoji-mart {
-    position: absolute;
-    bottom: 30px;
-    left: -300px;
+  position: absolute;
+  bottom: 30px;
+  left: -300px;
+}
+
+.bottom-chat {
+  display: flex;
+}
+
+.bottom-chat > * {
+  margin: auto;
+}
+
+.emoji-button {
+  margin: 0.5rem;
+}
+
+.emoji-mart {
+  z-index: 3;
 }

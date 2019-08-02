@@ -10,15 +10,20 @@
     "emojione": "^3.1.7",
     "firebase": "^5.2.0",
     "firebaseui": "^3.1.1",
+    "linkify-it": "^2.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-emoji-render": "^1.0.0",
     "react-firebaseui": "^3.0.4",
     "react-media": "^1.8.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-swipeable": "^4.3.0",
-    "redux": "^4.0.0"
+    "react-tiny-link": "^1.0.2",
+    "react-webcam": "^1.0.4",
+    "redux": "^4.0.0",
+    "tlds": "^1.203.1"
   },
   "scripts": {
     "start": "react-app-rewired start",

@@ -7,6 +7,7 @@ import Login from './login/Login';
 import Chats from './chat/Chats';
 import { Layout, Menu, Icon } from 'antd';
 import { sendTokenToServer } from './util/push-notifications';
+import WebcamManager from './misc/WebcamManager';
 
 const config = {
   apiKey: "AIzaSyDkFgHQOqyqKhUsa6GR0eY5noMUPGmLp_0",
@@ -80,6 +81,7 @@ class App extends Component {
             </Menu>
           </Header>
           <Content>
+            <Route path="/photo" component={WebcamManager} />
             <Route path="/messages" component={() => (<Chats isSignedIn={this.state.isSignedIn} />)} />
             <Route path="/login" component={() => (<Login isSignedIn={this.state.isSignedIn}/>)} />
           </Content>

@@ -57,10 +57,6 @@ const uiConfig = {
 };
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-    }
-
 
     render() {
         if (this.props.isSignedIn) {
